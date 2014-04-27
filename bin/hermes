@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var Hermes = require('..');
+
+/**
+ * Hermes.
+ */
+
+var hermes = Hermes()
+  .use(require('../lib/plugins/shell'))
+  .use(require('../lib/plugins/speak'))
+  .use(require('../lib/plugins/love'))
+  .use(require('../lib/plugins/whats-my-name'));
