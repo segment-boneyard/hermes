@@ -7,7 +7,10 @@ var Hermes = require('..');
  */
 
 var hermes = Hermes()
-  .use(require('../lib/plugins/shell'))
-  .use(require('../lib/plugins/speak'))
-  .use(require('../lib/plugins/love'))
+  .use(require('../lib/plugins/hipchat')({
+    jid: '54910_800705@chat.hipchat.com',
+    password: 'ea1ae3d4acf460602279',
+    apiKey: '8e4f95fa250d66efca51abf3ffd602',
+    log: true
+  }))
   .use(require('../lib/plugins/whats-my-name'));
