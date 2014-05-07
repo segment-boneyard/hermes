@@ -13,4 +13,4 @@ var hermes = Hermes()
     apiKey: '8e4f95fa250d66efca51abf3ffd602',
     log: true
   }))
-  .use(require('../lib/plugins/whats-my-name'));
+  .use(require('../lib/plugins/love')());
