@@ -10,7 +10,6 @@
     "chalk": "^0.4.0",
     "commander": "^2.2.0",
     "component-type": "^1.0.0",
-    "escape-regexp": "0.0.1",
     "node-hipchat": "^0.4.5",
     "simple-xmpp": "^0.1.19",
     "node-xmpp": "^1.0.0-alpha1",
