@@ -11,9 +11,7 @@
     "commander": "^2.2.0",
     "component-type": "^1.0.0",
     "node-hipchat": "^0.4.5",
-    "simple-xmpp": "^0.1.19",
     "node-xmpp": "^1.0.0-alpha1",
-    "bind-all": "0.0.2",
     "lodash": "~2.4.1"
   },
   "devDependencies": {
