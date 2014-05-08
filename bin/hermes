@@ -4,39 +4,13 @@ var join = require('path').join;
 var spawn = require('child_process').spawn;
 
 /**
- * Args.
+ * Re-create the args passed so that we can pass through node args to node
+ * itself when calling the "real" bin. Simple since hermes has no flags.
  */
 
-var args = [join(__dirname, '_hermes')];
-
-/**
- * Node flags.
- */
-
-var flags = [
-  '-d',
-  'debug',
-  '--debug',
-  '--debug-brk',
-  '-gc',
-  '--expose-gc',
-  '--gc-glocal',
-  '--harmony',
-  '--harmony-proxies',
-  '--harmony-generators',
-  '--prof',
-  '--trace'
-];
-
-/**
- * Check for node flags and add them to the command.
- */
-
-process.argv.slice(2).forEach(function(arg){
-  ~flags.indexOf(arg)
-    ? args.unshift(arg)
-    : args.push(arg);
-});
+var bin = join(__dirname, '_hermes');
+var args = process.argv.slice(2);
+args.push(bin);
 
 /**
  * Spawn.

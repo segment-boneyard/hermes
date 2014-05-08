@@ -2,24 +2,14 @@
 
 var exists = require('fs').existsSync;
 var Hermes = require('..');
-var join = require('path').join;
-var program = require('commander');
 var resolve = require('path').resolve;
 var shell = require('../lib/plugins/shell');
-
-/**
- * Options.
- */
-
-program
-  .option('-c, --config <path>', 'set the path to the config file', 'hermes.json')
-  .parse(process.argv);
 
 /**
  * Config.
  */
 
-var config = resolve(program.config);
+var config = resolve('hermes.json');
 if (!exists(config)) fatal('Could not find configuration file at %s', config);
 
 try {
