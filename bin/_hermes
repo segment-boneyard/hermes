@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+
+var exists = require('fs').existsSync;
+var Hermes = require('..');
+var join = require('path').join;
+var program = require('commander');
+var resolve = require('path').resolve;
+var shell = require('../lib/plugins/shell');
+
+/**
+ * Options.
+ */
+
+program
+  .option('-c, --config <path>', 'set the path to the config file', 'hermes.json')
+  .parse(process.argv);
+
+/**
+ * Config.
+ */
+
+var config = resolve(program.config);
+if (!exists(config)) fatal('Could not find configuration file at %s', config);
+
+try {
+  var json = require(config);
+  var name = json.name;
+  var template = json.template;
+  var plugins = json.plugins || {};
+} catch (e) {
+  fatal('Invalid JSON in configuration file at %s', config);
+}
+
+/**
+ * Hermes.
+ */
+
+var hermes = Hermes();
+if (json.name) hermes.name(json.name);
+if (json.template) hermes.template(json.template);
+hermes.use(shell());
+
+/**
+ * Plugins.
+ */
+
+Object.keys(plugins).forEach(function(name){
+  try {
+    var options = plugins[name];
+    var fn = require(resolve(name));
+    hermes.use(fn(options));
+  } catch (e) {
+    fatal('Failed to require plugin "%s".', name);
+  }
+});
+
+/**
+ * Log a fatal `err` and exit.
+ *
+ * @param {String or Error} err
+ * @param {Mixed} args...
+ */
+
+function fatal(err){
+  if (err instanceof Error) err = err.message + '\n' + err.stack;
+  console.error.apply(null, arguments);
+  process.exit(1);
+}

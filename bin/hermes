@@ -1,16 +1,53 @@
 #!/usr/bin/env node
 
-var Hermes = require('..');
+var join = require('path').join;
+var spawn = require('child_process').spawn;
 
 /**
- * Hermes.
+ * Args.
  */
 
-var hermes = Hermes()
-  .use(require('../lib/plugins/shell')())
-  // .use(require('../lib/plugins/hipchat')({
-  //   jid: '54910_800705@chat.hipchat.com',
-  //   password: 'ea1ae3d4acf460602279',
-  //   apiKey: '8e4f95fa250d66efca51abf3ffd602'
-  // }))
-  .use(require('../lib/plugins/love')());
+var args = [join(__dirname, '_hermes')];
+
+/**
+ * Node flags.
+ */
+
+var flags = [
+  '-d',
+  'debug',
+  '--debug',
+  '--debug-brk',
+  '-gc',
+  '--expose-gc',
+  '--gc-glocal',
+  '--harmony',
+  '--harmony-proxies',
+  '--harmony-generators',
+  '--prof',
+  '--trace'
+];
+
+/**
+ * Check for node flags and add them to the command.
+ */
+
+process.argv.slice(2).forEach(function(arg){
+  ~flags.indexOf(arg)
+    ? args.unshift(arg)
+    : args.push(arg);
+});
+
+/**
+ * Spawn.
+ */
+
+var child = spawn(process.argv[0], args, { customFds: [0,1,2] });
+
+child.on('exit', function(code, signal){
+  process.on('exit', function(){
+    signal
+      ? process.kill(process.pid, signal)
+      : process.exit(code);
+  });
+});

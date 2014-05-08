@@ -96,23 +96,24 @@ describe('robot', function(){
 
   describe('#hear', function(){
     it('should emit "hear"', function(done){
-      robot.once('hear', function(message, context){
-        assert.equal(message, 'message');
+      robot.once('hear', function(msg){
+        debugger;
+        assert.equal(msg, 'message');
         done();
       });
       robot.hear('message');
     });
 
     it('should emit not emit "mention" when not mentioned', function(){
-      robot.once('mention', function(message, context){
+      robot.once('mention', function(msg){
         assert(false, 'Expected not to emit mention.');
       });
       robot.hear('message');
     });
 
     it('should emit "mention" when mentioned', function(done){
-      robot.once('mention', function(message, context){
-        assert.equal(message, 'message');
+      robot.once('mention', function(msg){
+        assert.equal(msg, 'message');
         done();
       });
       robot.hear('@robot message');
@@ -131,8 +132,8 @@ describe('robot', function(){
     });
 
     it('should filter by a regex', function(done){
-      robot.on('event', /yes/, function(context){
-        assert.equal(context.message, 'yes');
+      robot.on('event', /yes/, function(match, context){
+        assert.equal(match[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -140,8 +141,8 @@ describe('robot', function(){
     });
 
     it('should filter by a string', function(done){
-      robot.on('event', 'yes', function(context){
-        assert.equal(context.message, 'yes');
+      robot.on('event', 'yes', function(match, context){
+        assert.equal(match[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -149,7 +150,7 @@ describe('robot', function(){
     });
 
     it('should filter by a context', function(done){
-      robot.on('event', { user: 'yes' }, function(context){
+      robot.on('event', { user: 'yes' }, function(match, context){
         assert.equal(context.user, 'yes');
         done();
       });
@@ -158,8 +159,8 @@ describe('robot', function(){
     });
 
     it('should filter by a regex and context', function(done){
-      robot.on('event', /yes/, { user: 'yes' }, function(context){
-        assert.equal(context.message, 'yes');
+      robot.on('event', /yes/, { user: 'yes' }, function(match, context){
+        assert.equal(match[0], 'yes');
         assert.equal(context.user, 'yes');
         done();
       });
@@ -177,8 +178,8 @@ describe('robot', function(){
     });
 
     it('should filter by a regex', function(done){
-      robot.once('event', /yes/, function(context){
-        assert.equal(context.message, 'yes');
+      robot.once('event', /yes/, function(match, context){
+        assert.equal(match[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -186,8 +187,8 @@ describe('robot', function(){
     });
 
     it('should filter by a string', function(done){
-      robot.once('event', 'yes', function(context){
-        assert.equal(context.message, 'yes');
+      robot.once('event', 'yes', function(match, context){
+        assert.equal(match[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -195,7 +196,7 @@ describe('robot', function(){
     });
 
     it('should filter by a context', function(done){
-      robot.once('event', { user: 'yes' }, function(context){
+      robot.once('event', { user: 'yes' }, function(match, context){
         assert.equal(context.user, 'yes');
         done();
       });
@@ -204,8 +205,8 @@ describe('robot', function(){
     });
 
     it('should filter by a regex and context', function(done){
-      robot.once('event', /yes/, { user: 'yes' }, function(context){
-        assert.equal(context.message, 'yes');
+      robot.once('event', /yes/, { user: 'yes' }, function(match, context){
+        assert.equal(match[0], 'yes');
         assert.equal(context.user, 'yes');
         done();
       });
