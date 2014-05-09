@@ -19,7 +19,8 @@
     "goo.gl": "~0.1.0",
     "mathstring": "~0.1.5",
     "google-url": "0.0.4",
-    "indent": "0.0.1"
+    "indent": "0.0.1",
+    "gi": "0.0.2"
   },
   "devDependencies": {
     "mocha": "1.x"

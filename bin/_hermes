@@ -3,7 +3,7 @@
 var exists = require('fs').existsSync;
 var Hermes = require('..');
 var resolve = require('path').resolve;
-var shell = require('../lib/plugins/shell');
+var shell = require('../lib/shell');
 
 /**
  * Config.
