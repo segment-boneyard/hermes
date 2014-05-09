@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
+var chalk = require('chalk');
 var exists = require('fs').existsSync;
+var format = require('util').format;
+var indent = require('indent');
 var Hermes = require('..');
 var program = require('commander');
 var resolve = require('path').resolve;
@@ -17,6 +20,13 @@ program
 program._name = 'hermes';
 
 program.parse(process.argv);
+
+/**
+ * Padding.
+ */
+
+console.log();
+process.on('exit', function(){ console.log(); });
 
 /**
  * Config.
@@ -65,14 +75,39 @@ Object.keys(plugins).forEach(function(name){
 if (debug) hermes.use(shell());
 
 /**
- * Log a fatal `err` and exit.
+ * Not debugging.
+ */
+
+if (!debug) {
+  log('running...');
+  process.on('exit', function(){
+    log('stopped.');
+    console.log();
+  });
+}
+
+/**
+ * Log a formatted `msg`.
  *
- * @param {String or Error} err
+ * @param {String} msg
  * @param {Mixed} args...
  */
 
-function fatal(err){
-  if (err instanceof Error) err = err.message + '\n' + err.stack;
-  console.error.apply(null, arguments);
+function log(msg){
+  msg = format.apply(null, arguments);
+  console.log(chalk.white('   Hermes'), chalk.gray('·'), msg);
+}
+
+/**
+ * Log a fatal, formatted error `msg` and exit.
+ *
+ * @param {String or Error} msg
+ * @param {Mixed} args...
+ */
+
+function fatal(msg){
+  if (msg instanceof Error) msg = msg.message + '\n\n' + indent(msg.stack, 12);
+  msg = format.apply(null, arguments);
+  console.error(chalk.red('   Hermes'), chalk.gray('·'), msg);
   process.exit(1);
 }
