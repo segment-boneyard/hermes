@@ -15,6 +15,7 @@ var shell = require('../lib/shell');
 
 program
   .version(require('../package.json').version)
+  .option('-s, --shell', 'run the hermes shell for easy debugging', false)
   .usage('[debug]');
 
 program._name = 'hermes';
@@ -32,7 +33,7 @@ process.on('exit', function(){ console.log(); });
  * Config.
  */
 
-var debug = !! ~program.args.indexOf('debug');
+var debug = !! ~program.args.indexOf('debug') || program.shell;
 var config = resolve('hermes.json');
 if (!exists(config)) fatal('Could not find configuration file at %s', config);
 

@@ -2,8 +2,6 @@
   "name": "Robot",
   "nickname": "robot",
   "plugins": {
-    "./lib/plugins/love": {},
-    "./lib/plugins/whats-my-name": {},
     "./lib/plugins/math": {},
     "./lib/plugins/url-shortener": {}
   }

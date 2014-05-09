@@ -9,6 +9,7 @@ var spawn = require('child_process').spawn;
 
 var flags = [
   '-h', '--help',
+  '-s', '--shell',
   '-V', '--version'
 ];
 
