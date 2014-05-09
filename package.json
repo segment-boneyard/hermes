@@ -24,7 +24,8 @@
     "gitio2": "~2.0.0"
   },
   "devDependencies": {
-    "mocha": "1.x"
+    "mocha": "1.x",
+    "browserify": "~3.46.0"
   },
   "keywords": [
     "chat",
