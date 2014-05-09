@@ -34,10 +34,10 @@ That would be setup to create a HipChat robot named "Picasso", that would know h
 You'll see him connect to your HipChat room. Then ask him to do things:
 
     > You: @watson shorten https://google.com
-    > Dr. Watson: @ian Sure thing: http://goo.gl/masklds
+    > Dr. Watson: @you Sure thing: http://goo.gl/masklds
 
     > You: @watson what's 52/3
-    > Dr. Watson: @ian That would be: 17.333333333
+    > Dr. Watson: @you That would be: 17.333333333
 
 ## Plugins
 
