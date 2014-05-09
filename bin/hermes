@@ -4,19 +4,38 @@ var join = require('path').join;
 var spawn = require('child_process').spawn;
 
 /**
+ * Hermes flags.
+ */
+
+var flags = [
+  '-h', '--help',
+  '-V', '--version'
+];
+
+/**
  * Re-create the args passed so that we can pass through node args to node
- * itself when calling the "real" bin. Simple since hermes has no flags.
+ * itself when calling the "real" bin.
  */
 
 var bin = join(__dirname, '_hermes');
-var args = process.argv.slice(2);
-args.push(bin);
+var args = [bin];
 
 /**
- * Spawn.
+ * Split the node-specific args from the Hermes-specific ones.
  */
 
-var child = spawn(process.argv[0], args, { customFds: [0,1,2] });
+process.argv.slice(2).forEach(function(arg){
+  if (~arg.indexOf('debug')) args.push('debug');
+  ~flags.indexOf(arg)
+    ? args.push(arg)
+    : args.unshift(arg);
+});
+
+/**
+ * Spawn the "real" bin in a forwarded child process.
+ */
+
+var child = spawn(process.argv[0], args, { stdio: 'inherit' });
 
 child.on('exit', function(code, signal){
   process.on('exit', function(){

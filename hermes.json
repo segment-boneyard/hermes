@@ -5,7 +5,6 @@
     "./lib/plugins/love": {},
     "./lib/plugins/whats-my-name": {},
     "./lib/plugins/math": {},
-    "./lib/echo": {},
     "./lib/plugins/url-shortener": {}
   }
 }

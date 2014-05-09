@@ -5,7 +5,7 @@ Hermes is a friendly, pluggable chat bot. He's super easy to customize, so you c
 
 ## Installation
 
-    $ npm install -g hermes
+    $ npm install hermes
 
 ## Usage
 
@@ -29,9 +29,9 @@ The simplest way to use Hermes is to use the CLI paired with a `hermes.json` con
 
 That would be setup to create a HipChat robot named "Dr. Watson", that would know how to do basic math and shorten URLs. Then, to run your robot, just do:
 
-    $ hermes
+    $ node_modules/.bin/hermes
 
-You'll see him connect to your HipChat room. Then ask him to do things:
+You'll see him connect to your HipChat room. Then you can ask him to do things:
 
     > You: @watson shorten https://github.com/segmentio/hermes
     > Dr. Watson: @you Sure thing: http://git.io/hJVhhQ
@@ -189,7 +189,7 @@ The trigger should just be `shorten <url>` and the `help` command will automatic
 
 ## Debugging
 
-Debugging ease was one of the core concerns when building Hermes. Since you need to use `stdin` in the shell for actually interacting with the robot, the typical `node debug` workflow doesn't help.
+Debugging ease was one of the core concerns when building Hermes. Since you need to use `stdin` in the shell to actually interact with the robot, the typical `node debug` workflow doesn't work well.
 
 Instead, using [`node-inspector`](https://github.com/node-inspector/node-inspector) you can easily call:
 

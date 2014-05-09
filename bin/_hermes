@@ -2,13 +2,27 @@
 
 var exists = require('fs').existsSync;
 var Hermes = require('..');
+var program = require('commander');
 var resolve = require('path').resolve;
 var shell = require('../lib/shell');
+
+/**
+ * Program.
+ */
+
+program
+  .version(require('../package.json').version)
+  .usage('[debug]');
+
+program.name = 'hermes';
+
+program.parse(process.argv);
 
 /**
  * Config.
  */
 
+var debug = !! ~program.args.indexOf('debug');
 var config = resolve('hermes.json');
 if (!exists(config)) fatal('Could not find configuration file at %s', config);
 
@@ -29,7 +43,6 @@ var hermes = Hermes();
 if (json.name) hermes.name(json.name);
 if (json.nickname) hermes.nickname(json.nickname);
 if (json.template) hermes.template(json.template);
-hermes.use(shell());
 
 /**
  * Plugins.
@@ -44,6 +57,12 @@ Object.keys(plugins).forEach(function(name){
     fatal(e);
   }
 });
+
+/**
+ * Debugging.
+ */
+
+if (debug) hermes.use(shell());
 
 /**
  * Log a fatal `err` and exit.
