@@ -14,7 +14,7 @@ program
   .version(require('../package.json').version)
   .usage('[debug]');
 
-program.name = 'hermes';
+program._name = 'hermes';
 
 program.parse(process.argv);
 
