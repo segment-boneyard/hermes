@@ -27,7 +27,7 @@ The simplest way to use Hermes is to use the CLI paired with a `hermes.json` con
 }
 ```
 
-That would be setup to create a HipChat robot named "Picasso", that would know how to do basic math and shorten URLs. Then, to run your robot, just do:
+That would be setup to create a HipChat robot named "Dr. Watson", that would know how to do basic math and shorten URLs. Then, to run your robot, just do:
 
     $ hermes
 
