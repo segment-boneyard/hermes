@@ -34,9 +34,9 @@ That would be setup to create a HipChat robot named "Picasso", that would know h
 You'll see him connect to your HipChat room. Then ask him to do things:
 
     > You: @watson shorten https://github.com/segmentio/hermes
-    > Dr. Watson: @you Sure thing: http://goo.gl/hZevN6
+    > Dr. Watson: @you Sure thing: http://git.io/hJVhhQ
 
-    > You: @watson what's 52/3
+    > You: @watson 52/3
     > Dr. Watson: @you That would be: 17.333333333
 
 ## Plugins
