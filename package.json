@@ -1,10 +1,13 @@
 {
   "name": "hermes",
-  "description": "A chat bot.",
-  "repository": "git://github.com/.git",
   "version": "0.0.0",
+  "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
+  "description": "Messenger of the gods.",
   "main": "lib/index.js",
+  "bin": {
+    "hermes": "bin/hermes"
+  },
   "dependencies": {
     "async": "^0.7.0",
     "chalk": "^0.4.0",
@@ -12,9 +15,23 @@
     "component-type": "^1.0.0",
     "node-hipchat": "^0.4.5",
     "node-xmpp": "^1.0.0-alpha1",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "goo.gl": "~0.1.0",
+    "mathstring": "~0.1.5",
+    "google-url": "0.0.4",
+    "indent": "0.0.1"
   },
   "devDependencies": {
     "mocha": "1.x"
-  }
+  },
+  "keywords": [
+    "chat",
+    "bot",
+    "robot",
+    "hipchat",
+    "irc",
+    "xmpp",
+    "hubot",
+    "slack"
+  ]
 }

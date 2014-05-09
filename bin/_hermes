@@ -18,7 +18,7 @@ try {
   var template = json.template;
   var plugins = json.plugins || {};
 } catch (e) {
-  fatal('Invalid JSON in configuration file at %s', config);
+  fatal(e);
 }
 
 /**
@@ -27,6 +27,7 @@ try {
 
 var hermes = Hermes();
 if (json.name) hermes.name(json.name);
+if (json.nickname) hermes.nickname(json.nickname);
 if (json.template) hermes.template(json.template);
 hermes.use(shell());
 
@@ -40,7 +41,7 @@ Object.keys(plugins).forEach(function(name){
     var fn = require(resolve(name));
     hermes.use(fn(options));
   } catch (e) {
-    fatal('Failed to require plugin "%s".', name);
+    fatal(e);
   }
 });
 
