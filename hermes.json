@@ -1,8 +1,0 @@
-{
-  "name": "Robot",
-  "nickname": "robot",
-  "plugins": {
-    "./lib/plugins/math": {},
-    "./lib/plugins/url-shortener": {}
-  }
-}

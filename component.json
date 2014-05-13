@@ -14,5 +14,10 @@
     "xmpp",
     "hubot",
     "slack"
-  ]
+  ],
+  "development": {
+    "dependencies": {
+      "component/assert": "*"
+    }
+  }
 }

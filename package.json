@@ -1,5 +1,5 @@
 {
-  "name": "hermes",
+  "name": "s-hermes",
   "version": "0.0.0",
   "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
@@ -16,12 +16,12 @@
     "node-hipchat": "^0.4.5",
     "node-xmpp": "^1.0.0-alpha1",
     "lodash": "~2.4.1",
-    "goo.gl": "~0.1.0",
     "mathstring": "~0.1.5",
     "google-url": "0.0.4",
     "indent": "0.0.1",
-    "gi": "0.0.2",
-    "gitio2": "~2.0.0"
+    "gitio2": "~2.0.0",
+    "uid": "0.0.2",
+    "to-function": "~2.0.3"
   },
   "devDependencies": {
     "mocha": "1.x",

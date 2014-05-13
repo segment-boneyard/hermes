@@ -37,7 +37,7 @@ function plugin(){
      */
 
     robot.say = function(message, context){
-      var name = this.name();
+      var name = chalk.white(this.name());
       var msg = format('%s%s%s', name, sep, message);
       console.log(msg);
       this.emit('say', message, context);
@@ -55,9 +55,8 @@ function plugin(){
      */
 
     robot.emote = function(message, context){
-      var name = this.name();
+      var name = chalk.gray(this.name());
       var msg = format('%s %s', name, message);
-      if (chalk) msg = chalk.gray(msg);
       console.log(msg);
       this.emit('emote', message, context);
       return this;
@@ -75,9 +74,9 @@ function plugin(){
      */
 
     robot.reply = function(id, message, context){
-      var name = this.name();
       var user = this.user(id);
       assert(user, 'Could not find a user by id "' + id + '".');
+      var name = chalk.white(this.name());
       var mention = this.mention(user.nickname);
       var msg = format('%s%s%s%s', name, sep, mention, message);
       console.log(msg);
@@ -98,8 +97,7 @@ function plugin(){
       assert(room, 'Could not find a room by id "' + id + '".');
       var name = room.name || id;
       var msg = format('The new topic for %s is "%s"', name, topic);
-      if (chalk) msg = chalk.gray(msg);
-      console.log(msg);
+      console.log(chalk.gray(msg));
       this.emit('topic', id, topic);
       return this;
     };
@@ -115,9 +113,8 @@ function plugin(){
      */
 
     robot.error = function(message, context){
-      if (message instanceof Error) message = stringify(message);
-      var pre = 'Error';
-      if (chalk) pre = chalk.red(pre);
+      if (message instanceof Error) message = message.stack;
+      var pre = chalk.red('Error');
       var msg = format('%s%s%s', pre, sep, message);
       console.error(msg);
       this.emit('error', message, context);
@@ -135,8 +132,7 @@ function plugin(){
      */
 
     robot.warn = function(message, context){
-      var pre = 'Warning';
-      if (chalk) pre = chalk.yellow(pre);
+      var pre = chalk.yellow('Warning');
       var msg = format('%s%s%s', pre, sep, message);
       console.warn(msg);
       this.emit('warn', message, context);
@@ -154,25 +150,13 @@ function plugin(){
      */
 
     robot.success = function(message, context){
-      var pre = 'Success';
-      if (chalk) pre = chalk.green(pre);
+      var pre = chalk.green('Success');
       var msg = format('%s%s%s', pre, sep, message);
       console.log(msg);
       this.emit('success', message, context);
       return this;
     };
   };
-}
-
-/**
- * Stringify an `error`.
- *
- * @param {Error} error
- * @return {String}
- */
-
-function stringify(error){
-  return format('%s\n\n%s\n', error.message, indent(error.stack, 2));
 }
 },{"assert":6,"chalk":14,"indent":19,"util":13}],2:[function(_dereq_,module,exports){
 
@@ -183,7 +167,7 @@ function stringify(error){
 module.exports = plugin;
 
 /**
- * Add echo commands to the robot.
+ * Add echoing commands to the robot.
  *
  * @return {Function}
  */
@@ -219,7 +203,7 @@ var fmt = _dereq_('util').format;
 module.exports = plugin;
 
 /**
- * Add a `help` method for documenting commands.
+ * Add a `help` method and command for documenting commands.
  *
  * @return {Function}
  */
@@ -249,7 +233,7 @@ function plugin(){
      * @param {Object} ctx
      */
 
-    robot.on('mention', /^help!?\??(?: (.*))?$/i, function(match, ctx){
+    robot.on('mention', /^h+(?:e|a)+l+p+!?\??(?: (.*))?$/i, function(match, ctx){
       var cmds = filter(commands, match[1]);
       var msg = cmds.map(format).join('\n\n');
       if (!msg) msg = 'No commands have been registered.';
@@ -495,6 +479,7 @@ function has(object, another){
   }
   return true;
 }
+
 },{"./console":1,"./echo":2,"./help":3,"./memory":5,"assert":6,"component-type":18,"events":9,"util":13}],5:[function(_dereq_,module,exports){
 
 var assert = _dereq_('assert');
@@ -1565,8 +1550,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_("/home/vagrant/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":7,"/home/vagrant/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11,"inherits":10}],9:[function(_dereq_,module,exports){
+}).call(this,_dereq_("/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":7,"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11,"inherits":10}],9:[function(_dereq_,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1959,7 +1944,7 @@ process.chdir = function (dir) {
 module.exports=_dereq_(7)
 },{}],13:[function(_dereq_,module,exports){
 module.exports=_dereq_(8)
-},{"./support/isBuffer":12,"/home/vagrant/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11,"inherits":10}],14:[function(_dereq_,module,exports){
+},{"./support/isBuffer":12,"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11,"inherits":10}],14:[function(_dereq_,module,exports){
 'use strict';
 var ansi = _dereq_('ansi-styles');
 var stripAnsi = _dereq_('strip-ansi');
@@ -2099,8 +2084,8 @@ module.exports = (function () {
 	return false;
 })();
 
-}).call(this,_dereq_("/home/vagrant/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/home/vagrant/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11}],17:[function(_dereq_,module,exports){
+}).call(this,_dereq_("/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
+},{"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11}],17:[function(_dereq_,module,exports){
 'use strict';
 module.exports = function (str) {
 	return typeof str === 'string' ? str.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') : str;
