@@ -1,0 +1,7 @@
+{
+  "name": "Picasso",
+  "nickname": "mozart",
+  "plugins": {
+    "./plugin": {}
+  }
+}

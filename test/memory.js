@@ -67,13 +67,13 @@ describe('memory', function(){
   describe('#user', function(){
     it('should set and get a user by id', function(){
       robot.user('id', { name: 'user' });
-      assert.deepEqual(robot.user('id'), { id: 'id', name: 'user' });
+      assert.deepEqual(robot.user('id'), { id: 'id', name: 'user', nickname: 'user' });
     });
 
     it('should emit "user"', function(done){
       robot.once('user', function(id, attrs){
         assert.equal(id, 'id');
-        assert.deepEqual(attrs, { id: 'id', name: 'user' });
+        assert.deepEqual(attrs, { id: 'id', name: 'user', nickname: 'user' });
         done();
       });
       robot.user('id', { name: 'user' });
@@ -90,8 +90,8 @@ describe('memory', function(){
       robot.user(1, { name: 'one' });
       robot.user(2, { name: 'two' });
       assert.deepEqual(robot.users(), [
-        { id: 1, name: 'one' },
-        { id: 2, name: 'two' }
+        { id: 1, name: 'one', nickname: 'one' },
+        { id: 2, name: 'two', nickname: 'two' }
       ]);
     });
   });

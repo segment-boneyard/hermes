@@ -9,7 +9,7 @@ var spawn = require('child_process').spawn;
 
 var flags = [
   '-h', '--help',
-  '-s', '--shell',
+  '-r', '--repl',
   '-V', '--version'
 ];
 
@@ -26,7 +26,6 @@ var args = [bin];
  */
 
 process.argv.slice(2).forEach(function(arg){
-  if (~arg.indexOf('debug')) args.push('debug');
   ~flags.indexOf(arg)
     ? args.push(arg)
     : args.unshift(arg);

@@ -7,20 +7,18 @@ var indent = require('indent');
 var Hermes = require('..');
 var program = require('commander');
 var resolve = require('path').resolve;
-var shell = require('../lib/shell');
+var repl = require('../lib/repl');
 
 /**
  * Program.
  */
 
-program
-  .version(require('../package.json').version)
-  .option('-s, --shell', 'run the hermes shell for easy debugging', false)
-  .usage('[debug]');
-
 program._name = 'hermes';
 
-program.parse(process.argv);
+program
+  .version(require('../package.json').version)
+  .option('-r, --repl', 'run hermes with the repl adapter', false)
+  .parse(process.argv);
 
 /**
  * Padding.
@@ -33,7 +31,6 @@ process.on('exit', function(){ console.log(); });
  * Config.
  */
 
-var debug = !! ~program.args.indexOf('debug') || program.shell;
 var config = resolve('hermes.json');
 if (!exists(config)) fatal('Could not find configuration file at %s', config);
 
@@ -60,31 +57,34 @@ if (json.template) hermes.template(json.template);
  */
 
 Object.keys(plugins).forEach(function(name){
+  var options = plugins[name];
+  var plugin = req(name);
+  hermes.use(plugin(options));
+});
+
+if (program.repl) hermes.use(repl());
+
+/**
+ * Connect.
+ */
+
+hermes.connect();
+
+/**
+ * Require a module by `str` safely. This can be either a local path to a module
+ * or a global.
+ *
+ * @param {String} str
+ * @return {Mixed}
+ */
+
+function req(str){
+  if ('.' == str.charAt(0)) str = resolve(str); // local paths
   try {
-    var options = plugins[name];
-    var fn = require(resolve(name));
-    hermes.use(fn(options));
+    return require(str);
   } catch (e) {
     fatal(e);
   }
-});
-
-/**
- * Debugging.
- */
-
-if (debug) hermes.use(shell());
-
-/**
- * Not debugging.
- */
-
-if (!debug) {
-  log('running...');
-  process.on('exit', function(){
-    log('stopped.');
-    console.log();
-  });
 }
 
 /**

@@ -20,10 +20,7 @@ node_modules: package.json
 
 test: node_modules
 	@$(mocha) \
-	test/index.js \
-	test/memory.js \
-	test/console.js \
-	test/help \
+	test/cli.js \
 	--reporter spec
 
 .PHONY: clean test
