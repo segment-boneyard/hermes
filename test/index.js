@@ -131,9 +131,22 @@ describe('robot', function(){
       robot.emit('event');
     });
 
+    it('should return a response object for messages', function(done){
+      robot.on('event', /(.).*/, function(res){
+        assert.equal(res[0], 'string');
+        assert.equal(res[1], 's');
+        assert.equal(res.message, 'string');
+        assert.equal(res.user, 'user');
+        assert.equal(res.room, 'room');
+        assert.deepEqual(res.context, { user: 'user', room: 'room' });
+        done();
+      });
+      robot.emit('event', 'string', { user: 'user', room: 'room' });
+    });
+
     it('should filter by a regex', function(done){
-      robot.on('event', /yes/, function(match, context){
-        assert.equal(match[0], 'yes');
+      robot.on('event', /yes/, function(res){
+        assert.equal(res[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -141,8 +154,8 @@ describe('robot', function(){
     });
 
     it('should filter by a string', function(done){
-      robot.on('event', 'yes', function(match, context){
-        assert.equal(match[0], 'yes');
+      robot.on('event', 'yes', function(res){
+        assert.equal(res[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -150,8 +163,8 @@ describe('robot', function(){
     });
 
     it('should filter by a context', function(done){
-      robot.on('event', { user: 'yes' }, function(match, context){
-        assert.equal(context.user, 'yes');
+      robot.on('event', { user: 'yes' }, function(res){
+        assert.equal(res.user, 'yes');
         done();
       });
       robot.emit('event', 'message', { user: 'no' });
@@ -159,9 +172,9 @@ describe('robot', function(){
     });
 
     it('should filter by a regex and context', function(done){
-      robot.on('event', /yes/, { user: 'yes' }, function(match, context){
-        assert.equal(match[0], 'yes');
-        assert.equal(context.user, 'yes');
+      robot.on('event', /yes/, { user: 'yes' }, function(res){
+        assert.equal(res[0], 'yes');
+        assert.equal(res.user, 'yes');
         done();
       });
       robot.emit('event', 'no', { user: 'no' });
@@ -178,8 +191,8 @@ describe('robot', function(){
     });
 
     it('should filter by a regex', function(done){
-      robot.once('event', /yes/, function(match, context){
-        assert.equal(match[0], 'yes');
+      robot.once('event', /yes/, function(res){
+        assert.equal(res[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -187,8 +200,8 @@ describe('robot', function(){
     });
 
     it('should filter by a string', function(done){
-      robot.once('event', 'yes', function(match, context){
-        assert.equal(match[0], 'yes');
+      robot.once('event', 'yes', function(res){
+        assert.equal(res[0], 'yes');
         done();
       });
       robot.emit('event', 'no', {});
@@ -196,8 +209,8 @@ describe('robot', function(){
     });
 
     it('should filter by a context', function(done){
-      robot.once('event', { user: 'yes' }, function(match, context){
-        assert.equal(context.user, 'yes');
+      robot.once('event', { user: 'yes' }, function(res){
+        assert.equal(res.user, 'yes');
         done();
       });
       robot.emit('event', 'message', { user: 'no' });
@@ -205,9 +218,9 @@ describe('robot', function(){
     });
 
     it('should filter by a regex and context', function(done){
-      robot.once('event', /yes/, { user: 'yes' }, function(match, context){
-        assert.equal(match[0], 'yes');
-        assert.equal(context.user, 'yes');
+      robot.once('event', /yes/, { user: 'yes' }, function(res){
+        assert.equal(res[0], 'yes');
+        assert.equal(res.user, 'yes');
         done();
       });
       robot.emit('event', 'no', { user: 'no' });
