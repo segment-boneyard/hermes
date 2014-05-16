@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://segmentio.registry.nodejitsu.com"
   },
-  "version": "0.0.8",
+  "version": "0.0.9",
   "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
   "description": "Messenger of the gods.",
