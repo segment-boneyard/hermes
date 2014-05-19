@@ -198,6 +198,10 @@ Instead, using [`node-inspector`](https://github.com/node-inspector/node-inspect
 
 Like you're used to, and everything will just work.
 
+## Thank You!
+
+A _huge_ thank you to [Egor Kislitsyn](https://github.com/minibikini) for letting us use the `hermes` name on `npm`!
+
 ## License
 
 The MIT License (MIT)
