@@ -17,6 +17,7 @@ hermes.js: lib/*.js node_modules
 
 node_modules: package.json
 	@npm install
+	@touch node_modules # hack: omg shut up npm
 
 test: node_modules
 	@$(mocha) \

@@ -9,6 +9,8 @@ var robot;
 describe('robot', function(){
   beforeEach(function(){
     robot = new Hermes('Robot');
+    robot.user('user', { name: 'Name' });
+    robot.room('room', { name: 'Name' });
   });
 
   it('should expose a constructor', function(){
@@ -96,24 +98,25 @@ describe('robot', function(){
 
   describe('#hear', function(){
     it('should emit "hear"', function(done){
-      robot.once('hear', function(msg){
-        debugger;
-        assert.equal(msg, 'message');
+      robot.once('hear', function(res){
+        assert.equal(res[0], 'message');
+        assert.equal(res.message, 'message');
         done();
       });
       robot.hear('message');
     });
 
-    it('should emit not emit "mention" when not mentioned', function(){
-      robot.once('mention', function(msg){
+    it('should not emit "mention" when not mentioned', function(){
+      robot.once('mention', function(res){
         assert(false, 'Expected not to emit mention.');
       });
       robot.hear('message');
     });
 
     it('should emit "mention" when mentioned', function(done){
-      robot.once('mention', function(msg){
-        assert.equal(msg, 'message');
+      robot.once('mention', function(res){
+        assert.equal(res[0], 'message');
+        assert.equal(res.message, 'message');
         done();
       });
       robot.hear('@robot message');
@@ -132,55 +135,55 @@ describe('robot', function(){
     });
 
     it('should return a response object for messages', function(done){
-      robot.on('event', /(.).*/, function(res){
+      robot.on('hear', /(.).*/, function(res){
         assert.equal(res[0], 'string');
         assert.equal(res[1], 's');
         assert.equal(res.message, 'string');
-        assert.equal(res.user, 'user');
-        assert.equal(res.room, 'room');
+        assert.deepEqual(res.user, { id: 'user', name: 'Name', nickname: 'Name' });
+        assert.deepEqual(res.room, { id: 'room', name: 'Name' });
         assert.deepEqual(res.context, { user: 'user', room: 'room' });
         done();
       });
-      robot.emit('event', 'string', { user: 'user', room: 'room' });
+      robot.hear('string', { user: 'user', room: 'room' });
     });
 
     it('should filter by a regex', function(done){
-      robot.on('event', /yes/, function(res){
+      robot.on('hear', /yes/, function(res){
         assert.equal(res[0], 'yes');
         done();
       });
-      robot.emit('event', 'no', {});
-      robot.emit('event', 'yes', {});
+      robot.hear('no', {});
+      robot.hear('yes', {});
     });
 
     it('should filter by a string', function(done){
-      robot.on('event', 'yes', function(res){
+      robot.on('hear', 'yes', function(res){
         assert.equal(res[0], 'yes');
         done();
       });
-      robot.emit('event', 'no', {});
-      robot.emit('event', 'yes', {});
+      robot.hear('no', {});
+      robot.hear('yes', {});
     });
 
     it('should filter by a context', function(done){
-      robot.on('event', { user: 'yes' }, function(res){
-        assert.equal(res.user, 'yes');
+      robot.on('hear', { user: 'user' }, function(res){
+        assert.deepEqual(res.user, { id: 'user', name: 'Name', nickname: 'Name' });
         done();
       });
-      robot.emit('event', 'message', { user: 'no' });
-      robot.emit('event', 'message', { user: 'yes' });
+      robot.hear('message', { user: 'none' });
+      robot.hear('message', { user: 'user' });
     });
 
     it('should filter by a regex and context', function(done){
-      robot.on('event', /yes/, { user: 'yes' }, function(res){
+      robot.on('hear', /yes/, { user: 'user' }, function(res){
         assert.equal(res[0], 'yes');
-        assert.equal(res.user, 'yes');
+        assert.deepEqual(res.user, { id: 'user', name: 'Name', nickname: 'Name' });
         done();
       });
-      robot.emit('event', 'no', { user: 'no' });
-      robot.emit('event', 'no', { user: 'yes' });
-      robot.emit('event', 'yes', { user: 'no' });
-      robot.emit('event', 'yes', { user: 'yes' });
+      robot.hear('no', { user: 'none' });
+      robot.hear('no', { user: 'user' });
+      robot.hear('yes', { user: 'none' });
+      robot.hear('yes', { user: 'user' });
     });
   });
 
@@ -191,42 +194,42 @@ describe('robot', function(){
     });
 
     it('should filter by a regex', function(done){
-      robot.once('event', /yes/, function(res){
+      robot.once('hear', /yes/, function(res){
         assert.equal(res[0], 'yes');
         done();
       });
-      robot.emit('event', 'no', {});
-      robot.emit('event', 'yes', {});
+      robot.emit('hear', 'no', {});
+      robot.emit('hear', 'yes', {});
     });
 
     it('should filter by a string', function(done){
-      robot.once('event', 'yes', function(res){
+      robot.once('hear', 'yes', function(res){
         assert.equal(res[0], 'yes');
         done();
       });
-      robot.emit('event', 'no', {});
-      robot.emit('event', 'yes', {});
+      robot.emit('hear', 'no', {});
+      robot.emit('hear', 'yes', {});
     });
 
     it('should filter by a context', function(done){
-      robot.once('event', { user: 'yes' }, function(res){
-        assert.equal(res.user, 'yes');
+      robot.once('hear', { user: 'user' }, function(res){
+        assert.deepEqual(res.user, { id: 'user', name: 'Name', nickname: 'Name' });
         done();
       });
-      robot.emit('event', 'message', { user: 'no' });
-      robot.emit('event', 'message', { user: 'yes' });
+      robot.emit('hear', 'message', { user: 'none' });
+      robot.emit('hear', 'message', { user: 'user' });
     });
 
     it('should filter by a regex and context', function(done){
-      robot.once('event', /yes/, { user: 'yes' }, function(res){
+      robot.once('hear', /yes/, { user: 'user' }, function(res){
         assert.equal(res[0], 'yes');
-        assert.equal(res.user, 'yes');
+        assert.deepEqual(res.user, { id: 'user', name: 'Name', nickname: 'Name' });
         done();
       });
-      robot.emit('event', 'no', { user: 'no' });
-      robot.emit('event', 'no', { user: 'yes' });
-      robot.emit('event', 'yes', { user: 'no' });
-      robot.emit('event', 'yes', { user: 'yes' });
+      robot.emit('hear', 'no', { user: 'none' });
+      robot.emit('hear', 'no', { user: 'user' });
+      robot.emit('hear', 'yes', { user: 'none' });
+      robot.emit('hear', 'yes', { user: 'user' });
     });
   });
 
