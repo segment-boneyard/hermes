@@ -1,9 +1,6 @@
 {
-  "name": "s-hermes",
-  "publishConfig": {
-    "registry": "https://segmentio.registry.nodejitsu.com"
-  },
-  "version": "0.0.12",
+  "name": "hermes",
+  "version": "0.3.0",
   "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
   "description": "Messenger of the gods.",
