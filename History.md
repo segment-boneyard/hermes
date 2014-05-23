@@ -1,4 +1,8 @@
 
+0.4.0 - May 23, 2014
+--------------------
+* add browser support
+
 0.3.0 - May 23, 2014
 --------------------
 * publish publicly

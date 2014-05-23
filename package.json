@@ -1,6 +1,6 @@
 {
   "name": "hermes",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
   "description": "Messenger of the gods.",
@@ -25,7 +25,8 @@
   },
   "devDependencies": {
     "mocha": "1.x",
-    "browserify": "~3.46.0"
+    "browserify": "~3.46.0",
+    "serve": "^1.4.0"
   },
   "keywords": [
     "chat",

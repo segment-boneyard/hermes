@@ -1,165 +1,5 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Hermes=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
-var assert = _dereq_('assert');
-var indent = _dereq_('indent');
-var format = _dereq_('util').format;
-var chalk = _dereq_('chalk');
-
-/**
- * Expose `plugin`.
- */
-
-module.exports = plugin;
-
-/**
- * Separator.
- */
-
-var sep = ' · ';
-
-/**
- * Add basic console logging to the `robot` for all of its chat actions.
- *
- * @return {Function}
- */
-
-function plugin(){
-  return function(robot){
-
-    /**
-     * Say a `message`.
-     *
-     * @param {String} message
-     * @param {Object} context (optional)
-     *   @property {String} user
-     *   @property {String} room
-     * @return {Robot}
-     */
-
-    robot.say = function(message, context){
-      var name = chalk.white(this.name());
-      var msg = format('%s%s%s', name, sep, message);
-      console.log(msg);
-      this.emit('say', message, context);
-      return this;
-    };
-
-    /**
-     * Emote a `message`.
-     *
-     * @param {String} message
-     * @param {Object} context (optional)
-     *   @property {String} user
-     *   @property {String} room
-     * @return {Robot}
-     */
-
-    robot.emote = function(message, context){
-      var name = chalk.gray(this.name());
-      var msg = format('%s %s', name, message);
-      console.log(msg);
-      this.emit('emote', message, context);
-      return this;
-    };
-
-    /**
-     * Reply to a user by `id` with a `message`.
-     *
-     * @param {String} id
-     * @param {String} message
-     * @param {Object} context (optional)
-     *   @property {String} user
-     *   @property {String} room
-     * @return {Robot}
-     */
-
-    robot.reply = function(id, message, context){
-      var user = this.user(id);
-      assert(user, 'Could not find a user by id "' + id + '".');
-      var name = chalk.white(this.name());
-      var mention = this.mention(user.nickname);
-      var msg = format('%s%s%s%s', name, sep, mention, message);
-      console.log(msg);
-      this.emit('reply', id, message, context);
-      return this;
-    };
-
-    /**
-     * Set the `topic` of a room by `id`.
-     *
-     * @param {String} id
-     * @param {String} topic
-     * @return {Robot}
-     */
-
-    robot.topic = function(id, topic){
-      var room = this.room(id);
-      assert(room, 'Could not find a room by id "' + id + '".');
-      var name = room.name || id;
-      var msg = format('The new topic for %s is "%s"', name, topic);
-      console.log(chalk.gray(msg));
-      this.emit('topic', id, topic);
-      return this;
-    };
-
-    /**
-     * Send an error `message`.
-     *
-     * @param {String} message
-     * @param {Object} context (optional)
-     *   @property {String} user
-     *   @property {String} room
-     * @return {Robot}
-     */
-
-    robot.error = function(message, context){
-      if (message instanceof Error) message = message.stack;
-      var pre = chalk.red('Error');
-      var msg = format('%s%s%s', pre, sep, message);
-      console.error(msg);
-      this.emit('error', message, context);
-      return this;
-    };
-
-    /**
-     * Send a warning `message`.
-     *
-     * @param {String} message
-     * @param {Object} context (optional)
-     *   @property {String} user
-     *   @property {String} room
-     * @return {Robot}
-     */
-
-    robot.warn = function(message, context){
-      var pre = chalk.yellow('Warning');
-      var msg = format('%s%s%s', pre, sep, message);
-      console.warn(msg);
-      this.emit('warn', message, context);
-      return this;
-    };
-
-    /**
-     * Send a success `message`.
-     *
-     * @param {String} message
-     * @param {Object} context (optional)
-     *   @property {String} user
-     *   @property {String} room
-     * @return {Robot}
-     */
-
-    robot.success = function(message, context){
-      var pre = chalk.green('Success');
-      var msg = format('%s%s%s', pre, sep, message);
-      console.log(msg);
-      this.emit('success', message, context);
-      return this;
-    };
-  };
-}
-},{"assert":6,"chalk":14,"indent":19,"util":13}],2:[function(_dereq_,module,exports){
-
 /**
  * Expose `plugin`.
  */
@@ -192,7 +32,7 @@ function plugin(){
     });
   };
 }
-},{}],3:[function(_dereq_,module,exports){
+},{}],2:[function(_dereq_,module,exports){
 
 var fmt = _dereq_('util').format;
 
@@ -229,15 +69,14 @@ function plugin(){
     /**
      * Listen for `help`, with an optional filter.
      *
-     * @param {Array} match
-     * @param {Object} ctx
+     * @param {Response} res
      */
 
-    robot.on('mention', /^h+(?:e|a)+l+p+!?\??(?: (.*))?$/i, function(match, ctx){
-      var cmds = filter(commands, match[1]);
+    robot.on('mention', /^h+(?:e|a)+l+p+!?\??(?: (.*))?$/i, function(res){
+      var cmds = filter(commands, res[1]);
       var msg = cmds.map(format).join('\n\n');
       if (!msg) msg = 'No commands have been registered.';
-      robot.say(msg, ctx);
+      res.say(msg);
     });
 
     /**
@@ -250,7 +89,11 @@ function plugin(){
     function filter(commands, string){
       if (!string) return commands;
       return commands.filter(function(cmd){
-        return !! (~cmd.command.indexOf(extra) || ~cmd.description.indexOf(extra));
+        if (~cmd.description.indexOf(string)) return true;
+        for (var i = 0, trigger; trigger = cmd.triggers[i]; i++) {
+          if (~trigger.indexOf(string)) return true;
+        }
+        return false;
       });
     }
 
@@ -272,14 +115,14 @@ function plugin(){
     }
   };
 }
-},{"util":13}],4:[function(_dereq_,module,exports){
+},{"util":12}],3:[function(_dereq_,module,exports){
 
 var assert = _dereq_('assert');
-var console = _dereq_('./console');
 var echo = _dereq_('./echo');
 var format = _dereq_('util').format;
 var help = _dereq_('./help');
 var memory = _dereq_('./memory');
+var noop = function(){};
 var type = _dereq_('component-type');
 var Emitter = _dereq_('events').EventEmitter;
 var inherit = _dereq_('util').inherits;
@@ -298,12 +141,11 @@ module.exports = Robot;
 
 function Robot(name){
   if (!(this instanceof Robot)) return new Robot(name);
-  name = name || 'Hermes';
-  this.name(name);
-  this.nickname(name.split(' ')[0].toLowerCase());
+  this.setMaxListeners(Infinity);
+  this.on('error', noop);
+  this.name(name || 'Hermes');
   this.template('@%s ');
   this.use(memory());
-  this.use(console());
   this.use(help());
   this.use(echo());
 }
@@ -341,7 +183,7 @@ Robot.prototype.name = function(name){
   if (!arguments.length) return this._name;
   assert('string' == type(name), 'The robot\'s name must be a string.');
   this._name = name;
-  this.nickname(name);
+  this.nickname(nickify(name));
   this.emit('name', name);
   return this;
 };
@@ -426,18 +268,26 @@ Robot.prototype.hear = function(message, context){
  */
 
 Robot.prototype.on = function(event, regex, context, fn){
-  if ('function' == type(regex)) return on.call(this, event, regex);
+  if ('hear' != event && 'mention' != event) return on.call(this, event, regex);
+  if ('function' == type(regex)) fn = regex, context = null, regex = null;
   if ('function' == type(context)) fn = context, context = null;
   if ('object' == type(regex)) context = regex, regex = null;
   if ('string' == type(regex)) regex = new RegExp(regex);
 
   regex = regex || /.*/;
   context = context || {};
+  var robot = this;
 
   on.call(this, event, function(message, ctx){
     if (!has(ctx, context)) return;
-    var match = message.match(regex);
-    if (match) fn(match, ctx);
+    var res = message.match(regex);
+    if (!res) return;
+    res.message = message;
+    res.context = ctx;
+    if (ctx.user) res.user = robot.user(ctx.user);
+    if (ctx.room) res.room = robot.room(ctx.room);
+    bind(res, robot);
+    fn(res, robot);
   });
 
   return this;
@@ -456,14 +306,25 @@ Robot.prototype.on = function(event, regex, context, fn){
  */
 
 Robot.prototype.once = function(event, regex, context, fn){
-  if ('function' == type(regex)) return once.call(this, event, regex);
+  if ('hear' != event && 'mention' != event) return on.call(this, event, regex);
+  var robot = this;
 
-  var self = this;
-  return this.on(event, regex, context, function callback(match, ctx){
-    self.off(event, callback);
-    fn(match, ctx);
+  return this.on(event, regex, context, function callback(){
+    robot.off(event, callback);
+    fn.apply(this, arguments);
   });
 };
+
+/**
+ * Convert a `name` into a nickname string.
+ *
+ * @param {String} name
+ * @return {String}
+ */
+
+function nickify(name){
+  return name.split(' ')[0].toLowerCase();
+}
 
 /**
  * Check whether an `object` has all the values of `another` object.
@@ -473,14 +334,38 @@ Robot.prototype.once = function(event, regex, context, fn){
  * @return {Boolean}
  */
 
-function has(object, another){
+function has(object, another) {
   for (var key in another) {
     if (another[key] !== object[key]) return false;
   }
   return true;
 }
 
-},{"./console":1,"./echo":2,"./help":3,"./memory":5,"assert":6,"component-type":18,"events":9,"util":13}],5:[function(_dereq_,module,exports){
+/**
+ * Bind a `res` object with all of the speaking methods of a `robot`.
+ *
+ * @param {Object} res
+ * @param {Robot} robot
+ */
+
+function bind(res, robot){
+  var user = res.user;
+  var room = res.room;
+  var ctx = res.context;
+  res.say = function(msg){ robot.say(msg, ctx); };
+  res.emote = function(msg){ robot.emote(msg, ctx); };
+  res.reply = function(msg){ robot.reply(user, msg, ctx); };
+  res.error = function(msg){ robot.error(msg, ctx); };
+  res.warn = function(msg){ robot.warn(msg, ctx); };
+  res.info = function(msg){ robot.info(msg, ctx); };
+  res.success = function(msg){ robot.success(msg, ctx); };
+  res.topic = function(topic){ robot.topic(room, topic); };
+  res.on = function(event, regexp, fn){ robot.on(event, regexp, ctx, fn); };
+  res.once = function(event, regexp, fn){ robot.once(event, regexp, ctx, fn); };
+  res.off = function(event, fn){ robot.off(event, regexp, ctx, fn); };
+  res.hear = function(msg){ robot.hear(msg, ctx); };
+}
+},{"./echo":1,"./help":2,"./memory":4,"assert":5,"component-type":13,"events":8,"util":12}],4:[function(_dereq_,module,exports){
 
 var assert = _dereq_('assert');
 var filter = _dereq_('lodash').filter;
@@ -592,7 +477,7 @@ function plugin(){
   };
 }
 
-},{"assert":6,"lodash":20}],6:[function(_dereq_,module,exports){
+},{"assert":5,"lodash":14}],5:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -954,14 +839,14 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":8}],7:[function(_dereq_,module,exports){
+},{"util/":7}],6:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],8:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1551,7 +1436,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,_dereq_("/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":7,"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11,"inherits":10}],9:[function(_dereq_,module,exports){
+},{"./support/isBuffer":6,"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":10,"inherits":9}],8:[function(_dereq_,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1853,7 +1738,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],10:[function(_dereq_,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1878,7 +1763,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],11:[function(_dereq_,module,exports){
+},{}],10:[function(_dereq_,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1940,158 +1825,11 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
+},{}],11:[function(_dereq_,module,exports){
+module.exports=_dereq_(6)
 },{}],12:[function(_dereq_,module,exports){
 module.exports=_dereq_(7)
-},{}],13:[function(_dereq_,module,exports){
-module.exports=_dereq_(8)
-},{"./support/isBuffer":12,"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11,"inherits":10}],14:[function(_dereq_,module,exports){
-'use strict';
-var ansi = _dereq_('ansi-styles');
-var stripAnsi = _dereq_('strip-ansi');
-var hasColor = _dereq_('has-color');
-var defineProps = Object.defineProperties;
-var chalk = module.exports;
-
-var styles = (function () {
-	var ret = {};
-
-	ansi.grey = ansi.gray;
-
-	Object.keys(ansi).forEach(function (key) {
-		ret[key] = {
-			get: function () {
-				this._styles.push(key);
-				return this;
-			}
-		};
-	});
-
-	return ret;
-})();
-
-function init() {
-	var ret = {};
-
-	Object.keys(styles).forEach(function (name) {
-		ret[name] = {
-			get: function () {
-				var obj = defineProps(function self() {
-					var str = [].slice.call(arguments).join(' ');
-
-					if (!chalk.enabled) {
-						return str;
-					}
-
-					return self._styles.reduce(function (str, name) {
-						var code = ansi[name];
-						return str ? code.open + str + code.close : '';
-					}, str);
-				}, styles);
-
-				obj._styles = [];
-
-				return obj[name];
-			}
-		}
-	});
-
-	return ret;
-}
-
-defineProps(chalk, init());
-
-chalk.styles = ansi;
-chalk.stripColor = stripAnsi;
-chalk.supportsColor = hasColor;
-
-// detect mode if not set manually
-if (chalk.enabled === undefined) {
-	chalk.enabled = chalk.supportsColor;
-}
-
-},{"ansi-styles":15,"has-color":16,"strip-ansi":17}],15:[function(_dereq_,module,exports){
-'use strict';
-var styles = module.exports;
-
-var codes = {
-	reset: [0, 0],
-
-	bold: [1, 22],
-	italic: [3, 23],
-	underline: [4, 24],
-	inverse: [7, 27],
-	strikethrough: [9, 29],
-
-	black: [30, 39],
-	red: [31, 39],
-	green: [32, 39],
-	yellow: [33, 39],
-	blue: [34, 39],
-	magenta: [35, 39],
-	cyan: [36, 39],
-	white: [37, 39],
-	gray: [90, 39],
-
-	bgBlack: [40, 49],
-	bgRed: [41, 49],
-	bgGreen: [42, 49],
-	bgYellow: [43, 49],
-	bgBlue: [44, 49],
-	bgMagenta: [45, 49],
-	bgCyan: [46, 49],
-	bgWhite: [47, 49]
-};
-
-Object.keys(codes).forEach(function (key) {
-	var val = codes[key];
-	var style = styles[key] = {};
-	style.open = '\x1b[' + val[0] + 'm';
-	style.close = '\x1b[' + val[1] + 'm';
-});
-
-},{}],16:[function(_dereq_,module,exports){
-(function (process){
-'use strict';
-module.exports = (function () {
-	if (process.argv.indexOf('--no-color') !== -1) {
-		return false;
-	}
-
-	if (process.argv.indexOf('--color') !== -1) {
-		return true;
-	}
-
-	if (process.stdout && !process.stdout.isTTY) {
-		return false;
-	}
-
-	if (process.platform === 'win32') {
-		return true;
-	}
-
-	if ('COLORTERM' in process.env) {
-		return true;
-	}
-
-	if (process.env.TERM === 'dumb') {
-		return false;
-	}
-
-	if (/^screen|^xterm|^vt100|color|ansi|cygwin|linux/i.test(process.env.TERM)) {
-		return true;
-	}
-
-	return false;
-})();
-
-}).call(this,_dereq_("/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":11}],17:[function(_dereq_,module,exports){
-'use strict';
-module.exports = function (str) {
-	return typeof str === 'string' ? str.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') : str;
-};
-
-},{}],18:[function(_dereq_,module,exports){
+},{"./support/isBuffer":11,"/Users/Storm/dev/segmentio/hermes/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":10,"inherits":9}],13:[function(_dereq_,module,exports){
 
 /**
  * toString ref.
@@ -2125,26 +1863,7 @@ module.exports = function(val){
   return typeof val;
 };
 
-},{}],19:[function(_dereq_,module,exports){
-
-var assert = _dereq_('assert');
-
-/**
- * Indent a `string` by `w`.
- *
- * @param {String} string
- * @param {String or Number} w
- * @return {String}
- */
-
-module.exports = function indent(string, w){
-  if (1 == arguments.length) w = 2;
-  assert('string' == typeof string);
-  assert('string' == typeof w || 'number' == typeof w);
-  if ('number' == typeof w) w = new Array(w + 1).join(' ');
-  return string.replace(/^/mg, w);
-};
-},{"assert":6}],20:[function(_dereq_,module,exports){
+},{}],14:[function(_dereq_,module,exports){
 (function (global){
 /**
  * @license
@@ -8933,6 +8652,6 @@ module.exports = function indent(string, w){
 }.call(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[4])
-(4)
+},{}]},{},[3])
+(3)
 });
