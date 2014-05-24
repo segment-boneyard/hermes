@@ -1,0 +1,5 @@
+{
+  "name": "flip",
+  "scripts": ["index.js"],
+  "local": ["to-flip-case"]
+}

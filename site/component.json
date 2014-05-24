@@ -1,0 +1,24 @@
+{
+  "name": "hermes",
+  "public": false,
+  "styles": ["index.css"],
+  "scripts": ["index.js"],
+  "templates": ["index.html"],
+  "paths": [
+    "lib",
+    "plugins"
+  ],
+  "local": [
+    "color",
+    "css",
+    "flip",
+    "reminder",
+    "repl",
+    "store"
+  ],
+  "dependencies": {
+    "ianstormtaylor/reset": "*",
+    "ripplejs/ripple": "*",
+    "segmentio/hermes": "*"
+  }
+}

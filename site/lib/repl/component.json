@@ -1,0 +1,17 @@
+{
+  "name": "repl",
+  "scripts": [
+    "index.js",
+    "repl.js"
+  ],
+  "templates": [
+    "repl.html"
+  ],
+  "dependencies": {
+    "component/emitter": "*",
+    "ripplejs/bind-methods": "*",
+    "ripplejs/each": "*",
+    "ripplejs/events": "*",
+    "ripplejs/ripple": "*"
+  }
+}
