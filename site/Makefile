@@ -4,7 +4,7 @@ myth = ../node_modules/.bin/myth
 serve = ../node_modules/.bin/serve
 
 build: node_modules components index.* $(shell find lib)
-	@$(component) build --dev --prefix .
+	@$(component) build --dev --prefix . --copy
 	@$(myth) build/build.css build/build.css
 
 components: node_modules $(shell find . -name component.json)

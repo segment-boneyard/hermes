@@ -17778,7 +17778,7 @@ var ol = view.el.querySelector('ol');\n\
  * Plugins.\n\
  */\n\
 \n\
-var plugins = ['flip', 'reminder', 'store'].map(function(name){\n\
+var plugins = ['flip', 'hint', 'reminder', 'store'].reverse().map(function(name){\n\
   var file = name + '.js';\n\
   var a = document.createElement('a');\n\
   a.textContent = file;\n\
@@ -17917,6 +17917,15 @@ module.exports = function(robot){\n\
 };\n\
 //@ sourceURL=hermes/plugins/flip.js"
 ));
+require.register("hermes/plugins/hint.js", Function("exports, require, module",
+"\n\
+module.exports = function(robot){\n\
+  robot.help('hint', 'Give you a little hint.');\n\
+  robot.on('mention', 'hint', function(res){\n\
+    res.say('Hit a tab in the top-right, and change the code I\\'m running ;)');\n\
+  });\n\
+};//@ sourceURL=hermes/plugins/hint.js"
+));
 require.register("hermes/plugins/reminder.js", Function("exports, require, module",
 "\n\
 module.exports = function(robot){\n\
@@ -17924,7 +17933,7 @@ module.exports = function(robot){\n\
   robot.on('mention', /remind(?:er)? (\\d+) (.*)/i, function(res){\n\
     var minutes = res[1];\n\
     var msg = res[2];\n\
-    var ms = parseInt(minutes, 10) * 1000;\n\
+    var ms = parseInt(minutes, 10) * 1000 * 60;\n\
     var fn = res.say.bind(res, 'REMINDER: ' + msg);\n\
     res.say('Sure thing, I set a reminder for ' + minutes + ' minutes from now.');\n\
     setTimeout(fn, ms);\n\

@@ -22,7 +22,7 @@ var ol = view.el.querySelector('ol');
  * Plugins.
  */
 
-var plugins = ['flip', 'reminder', 'store'].map(function(name){
+var plugins = ['flip', 'hint', 'reminder', 'store'].reverse().map(function(name){
   var file = name + '.js';
   var a = document.createElement('a');
   a.textContent = file;

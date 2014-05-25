@@ -10,6 +10,7 @@
   background-color: #f9f6f1;
   border-top: 1px solid #f1eadf;
   height: 401px;
+  text-transform: none;
 }
 
 .cm-s-custom .cm-keyword { color: #cb4b16 }
