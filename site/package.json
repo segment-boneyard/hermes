@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "myth": "^1.0.3",
-    "component": "^0.19.9"
+    "component": "^0.19.9",
+    "serve": "^1.4.0"
   }
 }
