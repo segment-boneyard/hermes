@@ -25,8 +25,7 @@
   },
   "devDependencies": {
     "mocha": "1.x",
-    "browserify": "~3.46.0",
-    "serve": "^1.4.0"
+    "browserify": "~3.46.0"
   },
   "keywords": [
     "chat",

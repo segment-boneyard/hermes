@@ -1,6 +1,7 @@
 
 component = ../node_modules/.bin/component
 myth = ../node_modules/.bin/myth
+serve = ../node_modules/.bin/serve
 
 build: node_modules components index.* $(shell find lib)
 	@$(component) build --dev --prefix .
@@ -14,5 +15,8 @@ clean:
 
 node_modules: package.json
 	@npm install
+
+server: node_modules
+	@$(serve) ..
 
 .PHONY: clean

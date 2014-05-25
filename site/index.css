@@ -16,7 +16,8 @@
  */
 
 html {
-  font: 16px/1 'Ideal Sans', 'Helvetica', sans-serif;
+  font: 15px/1 'Ideal Sans SSm A', 'Ideal Sans SSm B', 'Helvetica', sans-serif;
+  text-transform: lowercase;
   color: var(--black);
   min-height: 3000px;
   background: url('images/background.jpg') no-repeat top center;
@@ -54,16 +55,19 @@ html {
   right: -6.5em;
   padding: .8em;
   width: 20em;
-  font-variant: all-small-caps;
   white-space: nowrap;
   text-align: center;
   background-color: white;
-  color: var(--gold);
+  color: var(--sand);
   border-top: 3px solid var(--gold);
   border-bottom: 3px solid var(--gold);
   box-shadow: 0 5px 10px rgba(0,0,0,.3);
   transform: rotate(45deg);
   transform-origin: 50% 50%;
+}
+
+.Header-github-link:hover {
+  color: var(--gold);
 }
 
 /**
@@ -105,7 +109,6 @@ main {
   border-top: 3px solid transparent;
   padding: .8em 0;
   cursor: pointer;
-  font-variant: all-small-caps;
   color: var(--sand);
 }
 
