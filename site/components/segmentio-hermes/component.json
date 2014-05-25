@@ -1,0 +1,22 @@
+{
+  "name": "hermes",
+  "version": "0.4.0",
+  "repository": "segmentio/hermes",
+  "license": "MIT",
+  "description": "Messenger of the gods.",
+  "main": "hermes.js",
+  "scripts": [
+    "hermes.js"
+  ],
+  "keywords": [
+    "chat",
+    "bot",
+    "robot",
+    "hipchat",
+    "irc",
+    "xmpp",
+    "hubot",
+    "slack"
+  ],
+  "repo": "https://raw.githubusercontent.com/segmentio/hermes"
+}

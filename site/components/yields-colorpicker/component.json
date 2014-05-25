@@ -1,0 +1,21 @@
+{
+  "name": "colorpicker",
+  "repo": "yields/colorpicker",
+  "demo": "gh-pages",
+  "description": "simple color picker.",
+  "version": "0.1.0",
+  "keywords": [
+    "colorpicker"
+  ],
+  "dependencies": {
+    "component/emitter": "*",
+    "component/events": "*",
+    "yields/merge": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

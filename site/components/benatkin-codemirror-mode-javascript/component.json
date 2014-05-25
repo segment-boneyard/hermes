@@ -1,0 +1,13 @@
+{
+  "name": "codemirror-mode-javascript",
+  "repo": "benatkin/codemirror-mode-javascript",
+  "description": "a javascript mode for CodeMirror",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}

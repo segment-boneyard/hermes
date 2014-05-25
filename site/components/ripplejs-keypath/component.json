@@ -1,0 +1,16 @@
+{
+  "name": "keypath",
+  "description": "Get or set a property on an object using a keypath",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {
+    "component/assert": "*"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "repo": "https://raw.githubusercontent.com/ripplejs/keypath"
+}

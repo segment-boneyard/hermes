@@ -1,0 +1,14 @@
+{
+  "name": "array-observer",
+  "version": "0.3.0",
+  "dependencies": {
+    "component/emitter": "*"
+  },
+  "development": {
+    "component/assert": "*"
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "repo": "https://raw.githubusercontent.com/ripplejs/array-observer"
+}
