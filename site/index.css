@@ -29,8 +29,10 @@ html {
  */
 
 .Header {
+  position: relative;
   padding: 8em 2em 3.5em;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .Header-title {
@@ -87,6 +89,7 @@ main {
  */
 
 .Shell {
+  position: relative;
   background-color: var(--white);
   box-shadow: 0 5px 10px rgba(0,0,0,.3);
 }

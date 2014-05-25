@@ -1,4 +1,7 @@
 {
   "name": "reminder",
-  "scripts": ["index.js"]
+  "scripts": ["index.js"],
+  "dependencies": {
+    "guille/ms.js": "*"
+  }
 }

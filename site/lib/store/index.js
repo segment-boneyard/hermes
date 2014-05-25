@@ -14,27 +14,20 @@ module.exports = plugin;
 function plugin(){
   return function(robot){
     robot.help([
-      'set <key> <value>',
       'get <key>',
-      'delete <key>'
-    ], 'Set, get or delete a <key> with <value>.');
+      'set <key> <value>'
+    ], 'Get or set a <key> with <value>.');
 
     robot.on('mention', /get (\w+)/i, function(res){
       var key = res[1];
-      res.reply(robot.data(key));
+      res.say(robot.data(key));
     });
 
     robot.on('mention', /set (\w+) (.*)/i, function(res){
       var key = res[1];
       var value = res[2];
       robot.data(key, value);
-      res.say('Set "' + key + '" to "' + value + '".');
-    });
-
-    robot.on('mention', /delete (\w+)/i, function(res){
-      var key = res[1];
-      robot.data(key, null);
-      res.say('Deleted "' + key + '".');
+      res.say('Just set "' + key + '" to "' + value + '".');
     });
   };
 }

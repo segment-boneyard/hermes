@@ -2,11 +2,11 @@
 component = ../node_modules/.bin/component
 myth = ../node_modules/.bin/myth
 
-build: node_modules components
+build: node_modules components index.* $(shell find lib)
 	@$(component) build --dev --prefix .
 	@$(myth) build/build.css build/build.css
 
-components: node_modules component.json
+components: node_modules $(shell find . -name component.json)
 	@$(component) install
 
 clean:

@@ -1,4 +1,11 @@
 {
   "name": "color",
-  "scripts": ["index.js"]
+  "scripts": ["index.js"],
+  "styles": ["index.css"],
+  "templates": ["index.html"],
+  "dependencies": {
+    "component/domify": "*",
+    "harthur/color": "*",
+    "yields/colorpicker": "*"
+  }
 }

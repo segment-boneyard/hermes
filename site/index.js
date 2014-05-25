@@ -29,7 +29,9 @@ view.appendTo('main');
 var menu = view.el.querySelector('menu');
 var ol = view.el.querySelector('ol');
 var plugins = {
+  'color.js': require('color'),
   'flip.js': require('flip'),
+  'reminder.js': require('reminder'),
   'store.js': require('store')
 };
 
