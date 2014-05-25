@@ -1,0 +1,21 @@
+{
+  "name": "path-observer",
+  "repo": "ripplejs/path-observer",
+  "description": "Watch a path of an object for changes",
+  "version": "0.2.0",
+  "keywords": [],
+  "dependencies": {
+    "ripplejs/keypath": "0.0.1",
+    "component/emitter": "1.1.2",
+    "component/type": "1.0.0",
+    "anthonyshort/raf-queue": "*"
+  },
+  "development": {
+    "component/assert": "*"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "ripple",
+  "version": "0.4.0",
+  "main": "lib/index.js",
+  "scripts": [
+    "lib/index.js",
+    "lib/view.js",
+    "lib/bindings.js",
+    "lib/model.js",
+    "lib/render.js",
+    "lib/directive.js",
+    "lib/text-binding.js",
+    "lib/attr-binding.js",
+    "lib/child-binding.js"
+  ],
+  "dependencies": {
+    "anthonyshort/attributes": "*",
+    "anthonyshort/dom-walk": "0.1.0",
+    "anthonyshort/is-boolean-attribute": "*",
+    "anthonyshort/raf-queue": "0.2.0",
+    "component/domify": "*",
+    "component/each": "*",
+    "component/emitter": "*",
+    "ripplejs/interpolate": "0.4.3",
+    "ripplejs/path-observer": "0.2.0",
+    "yields/uniq": "*"
+  },
+  "development": {
+    "component/assert": "*"
+  },
+  "repo": "https://raw.githubusercontent.com/ripplejs/ripple"
+}

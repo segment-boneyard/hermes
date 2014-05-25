@@ -1,0 +1,17 @@
+{
+  "name": "codemirror",
+  "repo": "benatkin/codemirror",
+  "description": "a syntax highlighting editor for browsers",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "codemirror.js"
+  ],
+  "styles": [
+    "codemirror.css"
+  ],
+  "main": "codemirror.js"
+}

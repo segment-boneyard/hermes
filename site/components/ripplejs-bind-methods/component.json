@@ -1,0 +1,16 @@
+{
+  "name": "bind-methods",
+  "repo": "https://raw.githubusercontent.com/ripplejs/bind-methods",
+  "description": "Plugin for view to automatically bind all functions to the view",
+  "version": "0.0.1",
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {},
+  "development": {
+    "ripplejs/ripple": "0.2.0",
+    "component/assert": "*"
+  },
+  "scripts": [
+    "index.js"
+  ]
+}

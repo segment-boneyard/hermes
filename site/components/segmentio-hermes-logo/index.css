@@ -1,0 +1,21 @@
+
+/**
+ * Hermes logo.
+ */
+
+.logo[data-logo="Hermes"] {
+  width: 3.2830820662623634em;
+}
+
+.logo[data-logo="Hermes"] > * {
+  background-image: url(images/logo.svg);
+  margin: 0 0 0 0;
+}
+
+.logo[data-logo="Hermes"][data-color="black"] > * {
+  background-image: url(images/logo-black.svg);
+}
+
+.logo[data-logo="Hermes"][data-color="white"] > * {
+  background-image: url(images/logo-white.svg);
+}

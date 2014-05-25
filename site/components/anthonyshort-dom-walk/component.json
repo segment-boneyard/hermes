@@ -1,0 +1,19 @@
+{
+  "name": "dom-walk",
+  "repo": "anthonyshort/dom-walk",
+  "description": "Walk down a DOM tree",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "timoxley/to-array": "*",
+    "JayceTDE/dom-contains": "*"
+  },
+  "development": {
+    "component/assert": "*"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
