@@ -18016,7 +18016,7 @@ require.register("repl/repl.html", Function("exports, require, module",
     </li>\\n\
   </ol>\\n\
   <form class=\"Repl-form\" on-submit=\"{{ this.submit }}\">\\n\
-    <input class=\"Repl-input\" type=\"text\" placeholder=\"Talk here&hellip;\">\\n\
+    <input class=\"Repl-input\" type=\"text\" placeholder=\"talk here&hellip;\">\\n\
     <input class=\"Repl-submit\" type=\"submit\">\\n\
   </form>\\n\
 </div>';//@ sourceURL=repl/repl.html"
