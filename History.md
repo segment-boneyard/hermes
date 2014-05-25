@@ -1,4 +1,9 @@
 
+0.4.1 - May 25, 2014
+--------------------
+* fix echo command
+* add help help
+
 0.4.0 - May 23, 2014
 --------------------
 * add browser support
