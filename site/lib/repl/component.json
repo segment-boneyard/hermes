@@ -4,6 +4,9 @@
     "index.js",
     "repl.js"
   ],
+  "styles": [
+    "index.css"
+  ],
   "templates": [
     "repl.html"
   ],

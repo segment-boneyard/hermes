@@ -1,0 +1,87 @@
+
+/**
+ * REPL.
+ *
+ *   .Repl
+ *     .Repl-log
+ *       .Repl-message
+ *         .Repl-message-name
+ *         .Repl-message-text
+ *       ...
+ *     .Repl-form
+ *       .Repl-input
+ *       .Repl-submit
+ */
+
+.Repl-log {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+}
+
+.Repl-log::scrollbar {
+  display: none;
+}
+
+.Repl-message:first-child::before {
+  content: '';
+  display: block;
+  height: 400px;
+}
+
+.Repl-message {
+  position: relative;
+  padding: 0 1em;
+  margin-bottom: .85em;
+  color: var(--sand);
+  line-height: 1.3;
+  display: flex;
+}
+
+.Repl-message-name {
+  text-align: right;
+  width: 5em;
+  font-weight: 100;
+}
+
+.Repl-message-name[data-name="Hermes"] {
+  color: var(--gold);
+}
+
+.Repl-message-text {
+  flex: 1;
+  padding-left: .75em;
+  color: color(var(--sand) shade(20%));
+  white-space: pre-line; /* preserve line breaks */
+}
+
+.Repl-form {
+  background-color: #f9f6f1;
+  border-top: 1px solid #f1eadf;
+}
+
+.Repl-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 1em;
+}
+
+.Repl-input:focus {
+  outline: none;
+}
+
+.Repl-input::placeholder {
+  color: var(--sand);
+  transition: opacity .2s;
+  font-weight: 100;
+}
+
+.Repl-input:focus::placeholder,
+.Repl-input:hover::placeholder {
+  opacity: .5;
+}
+
+.Repl-submit {
+  display: none;
+}

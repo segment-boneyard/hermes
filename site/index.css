@@ -1,0 +1,151 @@
+
+/**
+ * Variables.
+ */
+
+:root {
+  --gold: #f8c231;
+  --black: #040302;
+  --white: #FFFFFF;
+  --light-sand: #f1eadf;
+  --sand: #d5c19f;
+}
+
+/**
+ * Base.
+ */
+
+html {
+  font: 16px/1 'Ideal Sans', 'Helvetica', sans-serif;
+  color: var(--black);
+  min-height: 3000px;
+  background: url('images/background.jpg') no-repeat top center;
+  background-size: contain;
+  background-color: var(--black);
+}
+
+/**
+ * Header.
+ */
+
+.Header {
+  padding: 8em 2em 3.5em;
+  text-align: center;
+}
+
+.Header-title {
+  font-size: 5em;
+  margin-bottom: .4em;
+}
+
+.Header-subtitle {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 100;
+  text-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
+
+.Header-github-link {
+  display: block;
+  position: absolute;
+  top: 3em;
+  right: -6.5em;
+  padding: .8em;
+  width: 20em;
+  font-variant: all-small-caps;
+  white-space: nowrap;
+  text-align: center;
+  background-color: white;
+  color: var(--gold);
+  border-top: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 5px 10px rgba(0,0,0,.3);
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+}
+
+/**
+ * Main.
+ */
+
+main {
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+/**
+ * Shell.
+ *
+ *   .Shell
+ *     .Shell-menu
+ *       .Shell-menu-item
+ *       ...
+ *     .Shell-panes
+ *       .Shell-pane
+ *       ...
+ */
+
+.Shell {
+  background-color: var(--white);
+  box-shadow: 0 5px 10px rgba(0,0,0,.3);
+}
+
+.Shell-menu {
+  display: none;
+  overflow: hidden; /* clearfix */
+  padding: 0 1.25em;
+}
+
+.Shell-menu-item {
+  float: right;
+  border-top: 3px solid transparent;
+  padding: .8em 0;
+  cursor: pointer;
+  font-variant: all-small-caps;
+  color: var(--sand);
+}
+
+.Shell-menu-item + .Shell-menu-item {
+  margin-left: 2em;
+}
+
+.Shell-menu-item:first-child {
+  float: left;
+}
+
+.Shell-menu-item:hover {
+  color: color(var(--sand) shade(15%));
+}
+
+.Shell-menu-item.active {
+  color: var(--gold);
+  border-top-color: var(--gold);
+}
+
+.Plugin {
+  display: none;
+}
+
+
+/**
+ * Footer.
+ */
+
+footer {
+  padding: 5em 2em;
+  text-align: center;
+}
+
+/**
+ * Large screens.
+ */
+
+@media (min-width: 768px) {
+
+  .Header-github-link {
+    top: 3em;
+    right: -6.5em;
+  }
+
+}

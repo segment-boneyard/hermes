@@ -39,6 +39,8 @@ Repl.on('created', function(repl){
 
 Repl.prototype.add = function(data){
   this.data.messages.push(data);
+  var log = this.el.querySelector('.Repl-log');
+  log.scrollTop = log.scrollHeight;
 };
 
 /**

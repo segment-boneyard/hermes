@@ -1,0 +1,8 @@
+{
+  "name": "hermes",
+  "private": true,
+  "dependencies": {
+    "myth": "^1.0.3",
+    "component": "^0.19.9"
+  }
+}

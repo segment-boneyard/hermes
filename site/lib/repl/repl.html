@@ -1,12 +1,12 @@
 <div class="Repl">
   <ol class="Repl-log" each="{{ messages }}">
     <li class="Repl-message">
-      <span class="Repl-message-name">{{ name }}</span>
+      <span data-name="{{ name }}" class="Repl-message-name">{{ name }}</span>
       <span class="Repl-message-text">{{ text }}</span>
     </li>
   </ol>
   <form class="Repl-form" on-submit="{{ this.submit }}">
-    <input class="Repl-input" type="text">
+    <input class="Repl-input" type="text" placeholder="Talk here&hellip;">
     <input class="Repl-submit" type="submit">
   </form>
 </div>

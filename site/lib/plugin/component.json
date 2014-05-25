@@ -1,0 +1,8 @@
+{
+  "name": "plugin",
+  "scripts": ["index.js"],
+  "templates": ["index.html"],
+  "dependencies": {
+    "ripplejs/ripple": "*"
+  }
+}

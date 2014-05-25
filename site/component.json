@@ -1,17 +1,27 @@
 {
   "name": "hermes",
-  "public": false,
-  "styles": ["index.css"],
-  "scripts": ["index.js"],
-  "templates": ["index.html"],
+  "private": true,
+  "styles": [
+    "index.css"
+  ],
+  "scripts": [
+    "index.js"
+  ],
+  "templates": [
+    "index.html"
+  ],
+  "images": [
+    "images/background.jpg"
+  ],
   "paths": [
-    "lib",
-    "plugins"
+    "lib"
   ],
   "local": [
     "color",
     "css",
     "flip",
+    "math",
+    "plugin",
     "reminder",
     "repl",
     "store"
@@ -19,6 +29,9 @@
   "dependencies": {
     "ianstormtaylor/reset": "*",
     "ripplejs/ripple": "*",
-    "segmentio/hermes": "*"
+    "segmentio/hermes": "*",
+    "segmentio/hermes-logo": "*",
+    "benatkin/codemirror": "*",
+    "benatkin/codemirror-mode-javascript": "*"
   }
 }
