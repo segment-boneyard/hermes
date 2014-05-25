@@ -5,7 +5,10 @@
     "index.css"
   ],
   "scripts": [
-    "index.js"
+    "index.js",
+    "plugins/flip.js",
+    "plugins/reminder.js",
+    "plugins/store.js"
   ],
   "templates": [
     "index.html"
@@ -17,20 +20,14 @@
     "lib"
   ],
   "local": [
-    "color",
-    "flip",
-    "math",
     "plugin",
-    "reminder",
-    "repl",
-    "store"
+    "repl"
   ],
   "dependencies": {
+    "fredsterss/tabify": "*",
     "ianstormtaylor/reset": "*",
     "ripplejs/ripple": "*",
     "segmentio/hermes": "*",
-    "segmentio/hermes-logo": "*",
-    "benatkin/codemirror": "*",
-    "benatkin/codemirror-mode-javascript": "*"
+    "segmentio/hermes-logo": "*"
   }
 }

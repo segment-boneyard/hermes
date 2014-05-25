@@ -95,7 +95,7 @@ main {
 }
 
 .Shell-menu {
-  display: none;
+  display: block;
   overflow: hidden; /* clearfix */
   padding: 0 1.25em;
 }
@@ -126,10 +126,9 @@ main {
   border-top-color: var(--gold);
 }
 
-.Plugin {
+.Shell-pane.hidden {
   display: none;
 }
-
 
 /**
  * Footer.

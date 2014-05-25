@@ -1,8 +1,14 @@
 {
   "name": "plugin",
   "scripts": ["index.js"],
+  "styles": ["index.css"],
   "templates": ["index.html"],
+  "local": [
+    "codemirror-solarized-light"
+  ],
   "dependencies": {
+    "benatkin/codemirror": "*",
+    "benatkin/codemirror-mode-javascript": "*",
     "ripplejs/ripple": "*"
   }
 }

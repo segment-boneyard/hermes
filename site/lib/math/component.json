@@ -1,7 +1,0 @@
-{
-  "name": "math",
-  "scripts": ["index.js"],
-  "dependencies": {
-    "josdejong/mathjs": "*"
-  }
-}

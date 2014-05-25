@@ -1,5 +1,6 @@
 
-// var codemirror = require('codemirror');
+var codemirror = require('codemirror');
+var javascript = require('codemirror-mode-javascript')(codemirror);
 var ripple = require('ripple');
 var template = require('./index.html');
 
@@ -10,24 +11,26 @@ var template = require('./index.html');
 var Plugin = module.exports = ripple(template);
 
 /**
- * On created, setup CodeMirror.
+ * When mounted setup CodeMirror.
  */
 
-Plugin.on('created', function(plugin){
-  // var textarea = plugin.el.querySelector('textarea');
-  // var editor = codemirror.fromTextarea(textarea);
-
-  // editor.on('save', function(e){
-  //   plugin.code = e.value;
-  // });
+Plugin.on('mounted', function(plugin){
+  var textarea = plugin.el.querySelector('textarea');
+  plugin.editor = codemirror.fromTextArea(textarea, {
+    theme: 'custom',
+    lineNumbers: true
+  });
 });
 
 /**
- * Get the plugin's current code.
+ * Get the plugin's code.
  *
  * @return {String}
  */
 
 Plugin.prototype.code = function(){
-  return '';
+  var str = this.editor.getValue().trim();
+  var regex = /^module\.exports += +function *\(robot\) *{([\s\S]*)};?$/m;
+  var parsed = regex.exec(str)[1];
+  return parsed.trim();
 };
