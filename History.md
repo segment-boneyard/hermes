@@ -1,4 +1,8 @@
 
+0.4.3 - May 26, 2014
+--------------------
+* remove old unused dependencies
+
 0.4.2 - May 25, 2014
 --------------------
 * sort help

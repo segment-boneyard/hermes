@@ -14,21 +14,11 @@ module.exports = plugin;
 
 function plugin(){
   return function(robot){
-    robot.on('mention', /^(say|emote|error|warn|success) (.*)$/, function(match, ctx){
-      var method = match[1];
-      var msg = match[2];
-      robot[method](msg, ctx);
-    });
-
-    robot.on('mention', /^reply (.*)$/, function(match, ctx){
-      var msg = match[1];
-      robot.reply(ctx.user, msg, ctx);
-    });
-
-    robot.on('mention', /^topic (.*)$/, function(match, ctx){
-      if (!ctx.room) return;
-      var topic = match[1];
-      robot.topic(ctx.room, topic);
+    var match = /^(say|emote|reply|error|warn|success|info|topic) (.*)$/;
+    robot.on('mention', match, function(res){
+      var method = res[1];
+      var str = res[2];
+      res[method](str);
     });
   };
 }
@@ -63,8 +53,21 @@ function plugin(){
     robot.help = function(triggers, description){
       if ('string' == typeof triggers) triggers = [triggers];
       commands.push({ triggers: triggers, description: description });
+      commands.sort(function(a, b){
+        a = a.triggers[0];
+        b = b.triggers[0];
+        if (a > b) -1;
+        if (a < b) 1;
+        return 0;
+      });
       return this;
     };
+
+    /**
+     * Help help.
+     */
+
+    robot.help('help [<keyword>]', 'Show the help for all commands, filtered by an optional <keyword>.');
 
     /**
      * Listen for `help`, with an optional filter.

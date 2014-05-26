@@ -1,6 +1,6 @@
 {
   "name": "hermes",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
   "description": "Messenger of the gods.",
@@ -9,18 +9,11 @@
     "hermes": "bin/hermes"
   },
   "dependencies": {
-    "async": "^0.7.0",
     "chalk": "^0.4.0",
     "commander": "^2.2.0",
     "component-type": "^1.0.0",
-    "node-hipchat": "^0.4.5",
-    "node-xmpp": "^1.0.0-alpha1",
     "lodash": "~2.4.1",
-    "mathstring": "~0.1.5",
-    "google-url": "0.0.4",
     "indent": "0.0.1",
-    "gitio2": "~2.0.0",
-    "uid": "0.0.2",
     "to-function": "~2.0.3"
   },
   "devDependencies": {
