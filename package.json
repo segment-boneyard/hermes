@@ -1,6 +1,6 @@
 {
   "name": "hermes",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "repository": "git://github.com/segmentio/hermes.git",
   "license": "MIT",
   "description": "Messenger of the gods.",
