@@ -16,6 +16,7 @@ test: node_modules
 	test/index.js \
 	test/memory.js \
 	test/rooms.js \
+	test/users.js \
 	test/help.js \
 	test/cli.js \
 	--reporter spec
