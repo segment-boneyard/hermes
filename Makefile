@@ -1,4 +1,3 @@
-
 browserify = ./node_modules/.bin/browserify
 mocha = ./node_modules/.bin/mocha
 
@@ -19,6 +18,7 @@ test: node_modules
 	test/users.js \
 	test/help.js \
 	test/cli.js \
+	test/robot.js \
 	--reporter spec
 
 .PHONY: clean test
