@@ -19,7 +19,11 @@ describe('robot', function(){
         .usage('deploy <service> [version]')
         .mention()
         .do(function(chat, service, version){
+          assert.equal(service, 'coco');
+          assert.equal(version, '1.0');
+          done();
         });
+      robot.hear('@robot deploy coco 1.0');
     });
   });
 });
