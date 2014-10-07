@@ -18,7 +18,7 @@ describe('robot', function(){
         .summary('Deploy a service to production.')
         .usage('deploy <service> [version]')
         .mention()
-        .on(function(chat, service, version){
+        .do(function(chat, service, version){
         });
     });
   });
