@@ -14,11 +14,12 @@ describe('robot', function(){
   describe('#command', function(){
     it('should create a command', function(done){
       robot
-        .command('deploy')
+        .command()
         .summary('Deploy a service to production.')
         .usage('deploy <service> [version]')
         .mention()
         .do(function(chat, service, version){
+          assert(chat);
           assert.equal(service, 'coco');
           assert.equal(version, '1.0');
           done();
