@@ -15,9 +15,8 @@ describe('robot', function(){
     it('should create a command', function(done){
       robot
         .command()
+        .mention('deploy <service> [version]')
         .summary('Deploy a service to production.')
-        .usage('deploy <service> [version]')
-        .mention()
         .do(function(chat, service, version){
           assert(chat);
           assert.equal(service, 'coco');
